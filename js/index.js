@@ -21,8 +21,7 @@ item.forEach(function (i) {
 })
 
 btnNext.addEventListener('click', function () {
-    const itemsLeft = itemCount - (Math.abs(position) + slidesToShow * itemWidth) / itemWidth;
-    position -= itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
+    trafficForvard()
     console.log('positon :', position)
     console.log('ultimateWidth :', ultimateWidth)
     console.log(position === 0 || position > -ultimateWidth)
@@ -31,10 +30,9 @@ btnNext.addEventListener('click', function () {
 })
 
 btnPrev.addEventListener('click', function () {
-    const itemsLeft = Math.abs(position) / itemWidth;
+    trafficBack()
     console.log('position: ', position)
     console.log('ultimateWidth :', ultimateWidth)
-    position += itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
     setPosition()
     checkBtns()
 })
@@ -49,28 +47,34 @@ const setPosition = function () {
     track.style.transform = `translateX(${position}px)`
 }
 
-function movingNext() {
+function trafficForvard() {
     const itemsLeft = itemCount - (Math.abs(position) + slidesToShow * itemWidth) / itemWidth;
     position -= itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
+}
+
+function trafficBack() {
+    const itemsLeft = Math.abs(position) / itemWidth;
+    position += itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
+}
+
+function movingNext() {
+    trafficForvard()
     console.log('position: ', position)
     console.log('ultimateWidth :', ultimateWidth)
 
     setPosition()
     checkBtns()
-
     autoSliderNext()
 }
 
 function movingPrev() {
-    const itemsLeft = Math.abs(position) / itemWidth;
-    position += itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
+    trafficBack()
 
     console.log('position: ', position)
     console.log('ultimateWidth :', ultimateWidth)
 
     setPosition()
     checkBtns()
-    autoSliderPrev()
 }
 
 function autoSliderNext() {
@@ -81,18 +85,20 @@ function autoSliderPrev() {
     timerR = setTimeout(movingPrev, 1000)
 }
 
+
 function initScrollSlider() {
     if (position === 0 || position > -ultimateWidth) {
         clearTimeout(timerR)
         setTimeout(movingNext, 1000)
     }
-    if (position = -ultimateWidth) {
-        clearTimeout(timer)
-        setTimeout(movingPrev, 1000)
-    }
+
+    // if (position = -ultimateWidth) {
+    //     clearTimeout(timer)
+    //     setTimeout(movingPrev, 1000)
+    // }
 }
 
 checkBtns()
 
 
-// initScrollSlider()
+initScrollSlider()
