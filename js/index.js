@@ -75,6 +75,7 @@ function movingPrev() {
 
     setPosition()
     checkBtns()
+    autoSliderPrev()
 }
 
 function autoSliderNext() {
@@ -101,4 +102,4 @@ function initScrollSlider() {
 checkBtns()
 
 
-// initScrollSlider()
+initScrollSlider()
