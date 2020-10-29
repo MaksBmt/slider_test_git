@@ -101,4 +101,4 @@ function initScrollSlider() {
 checkBtns()
 
 
-initScrollSlider()
+// initScrollSlider()
